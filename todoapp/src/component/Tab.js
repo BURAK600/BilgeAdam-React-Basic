@@ -1,16 +1,29 @@
-import React from 'react';
+import { useState } from "react";
+function Tab({ children, activeTab }) {
+  console.log(children);
+  const [active, setActive] = useState(activeTab);
 
-const Tab = (children) => {
-    return (
-        <div className='container'>
-            {
-            children.map((data,index) =>{
+  return (
+    <div className=" container">
+      <nav>
+        {children.map((data, index) => {
+          return (
+            <button
+              onClick={() => setActive(index)}
+              key={index}
+              className={
+                active === index ? "bg-green-800 p-2" : "bg-slate-400 p-2"
+              }
+            >
+              {data.props.title}
+            </button>
+          );
+        })}
+      </nav>
 
-                return <button>{data.props.title}</button>
-            })
-        }
-        </div>
-    );
+      {children[active]}
+    </div>
+  );
 }
 
 export default Tab;

@@ -1,11 +1,8 @@
-import React from 'react';
 
-const Panel = () => {
-    return (
-        <div>
-            
-        </div>
-    );
+import React from "react";
+
+function Panel({ children }) {
+  return <div> {children}</div>;
 }
 
 export default Panel;
