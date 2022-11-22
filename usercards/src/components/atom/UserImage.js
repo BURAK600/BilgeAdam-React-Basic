@@ -1,9 +1,5 @@
 import React from 'react'
-import {
-  addSecilen,
-  removeSecilen
-
-} from '../../store/features/userListSlice'
+import {addSecilen, removeSecilen } from '../../store/features/userListSlice'
 
 
 import { useDispatch } from 'react-redux';
@@ -12,20 +8,17 @@ function UserImage(props) {
   const dispatch = useDispatch();
 
   const onClick = (evt) => {
-    if (evt.target.cheched)
+    console.log(evt.target.checked)
 
+    if (evt.target.checked)
       dispatch(addSecilen());
     else
       dispatch(removeSecilen());
-    
-
   }
+
   return (
-
-
     <div>
       <img
-
         style={{
           marginLeft: '10%',
           width: '80%',

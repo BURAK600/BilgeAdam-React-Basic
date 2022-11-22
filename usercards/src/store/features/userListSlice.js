@@ -32,6 +32,21 @@ export const getAllUsers = createAsyncThunk(
 
 )
 
+export const getLoadMoreUsers = createAsyncThunk(
+
+    'userList/getLoadMoreUsers',
+    async()=>{
+
+      const result = await fetch('https://randomuser.me/api/?results=10')
+
+        // istek sonucu dönen değeri json formatında çıktılamnak için kullnırız.
+        .then(response => response.json())
+        .then(data=>data);
+        return result;
+    }
+
+)
+
 const userListSlice = createSlice({
     /**
      * her slice icin unique bir isim verilmelidir.
@@ -69,18 +84,32 @@ const userListSlice = createSlice({
         }
     },
 
+
+
     extraReducers:(build)=>{
-        build.addCase(getAllUsers.pending, (state, action) =>{
+        build.addCase(getAllUsers.pending, (state) =>{
             state.loading = true;
         });
 
         build.addCase(getAllUsers.fulfilled, (state, action) =>{
             state.data = action.payload.results;
-            
             state.loading = false;
         });
 
         build.addCase(getAllUsers.rejected, (state) =>{
+
+            state.loading = false;
+        });
+
+        build.addCase(getLoadMoreUsers.pending, (state) =>{
+            state.loading = true;
+        })
+        build.addCase(getLoadMoreUsers.fulfilled, (state, action) =>{
+            state.data = [...state.data, ...action.payload.results];
+            state.loading = false;
+        });
+
+        build.addCase(getLoadMoreUsers.rejected, (state) =>{
 
             state.loading = false;
         });

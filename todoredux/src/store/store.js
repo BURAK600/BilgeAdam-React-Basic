@@ -1,12 +1,11 @@
-
 import {configureStore} from '@reduxjs/toolkit';
 
-import {userListSlice, projectSlice} from './features'
+import {todoSlice, projectSlice} from './features'
 
 
 const store = configureStore({
     reducer:{
-        userList: userListSlice,
+        userList: todoSlice,
         project: projectSlice
     }
 });

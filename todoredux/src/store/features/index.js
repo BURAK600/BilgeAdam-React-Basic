@@ -1,7 +1,7 @@
-import userListSlice from "./userListSlice";
+import todoSlice from "./todoSlice";
 import projectSlice from "./projectSlice";
 
 export {
-    userListSlice,
+    todoSlice,
     projectSlice
 }

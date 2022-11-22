@@ -3,12 +3,9 @@ import UserCard from '../components/molekul/UserCard';
 
 import { useSelector, useDispatch } from 'react-redux';
 
-import { getAllUsers } from '../store/features/userListSlice'
+import { getAllUsers, getLoadMoreUsers } from '../store/features/userListSlice'
 
 export default function UserPageList() {
-
-
-
   /**
    * react-redux ın sisteme entegre etmiş olduğu store useSelector ile secilir.
    * Buradan bize ulaşan store içindeki alyansları ile ilgili slice a  ulaşırız. Buradan sonra tek yapmamız gereken, slice içinde tanımlanana dataların isimleri ile ilgili datalara ulaşmaktır.
@@ -16,19 +13,17 @@ export default function UserPageList() {
    * durumunda, bu sayfa yeniden render edilir.
    */
   const secilen = useSelector((store) => store.userList.secilen);
-  const loading = useSelector((store) => store.userList.secilen);
-  const data = useSelector((store) => store.userList.secilen);
+  const loading = useSelector((store) => store.userList.loading);
+  const data = useSelector((store) => store.userList.data);
   const dispatch = useDispatch();
 
   const loadMore = () => {
-
-
+    dispatch(getLoadMoreUsers());
   };
 
   React.useEffect(() => {
-    dispatch(getAllUsers);
-  }, [dispatch
-  ]);
+    dispatch(getAllUsers());
+  }, [dispatch]);
 
 
   return (
@@ -38,9 +33,7 @@ export default function UserPageList() {
       </div>
       <div className='container'>
         <div className='row'>
-          <p style={{ fontSize: 24 }}>Seçilen kullaınıcı sayısı: {secilen}  </p>
-
-
+          <p style={{ fontSize: 24 }}>Seçilen kullaınıcı sayısı: {secilen} </p>
         </div>
         <div className='row'>
 
